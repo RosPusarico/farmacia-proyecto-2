@@ -1,12 +1,9 @@
 <template>
     <div class="navbar">
-        <div class="logo">MiLogo</div>
+        <div class="logo">Farmacia "Tu amiga"</div>
         <div style="font-size: 14px; font-weight: 100;" v-if="isLoged">
             {{ getUser['role'] }} \ {{ getUser['name'] }} <button @click="salir()">Salir</button>
-        </div>    
-        <div style="font-size: 14px; font-weight: 100;" v-if="!isLoged">
-            <button @click="login()">Inisiar sesion</button>
-        </div>    
+        </div>      
         <div class="menu">
             <slot></slot>
         </div>

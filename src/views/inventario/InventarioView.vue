@@ -10,13 +10,34 @@
         <button @click="showModalNuevo = true" class="btn btn-primary">Nuevo</button>
         <button @click="buscar()" class="btn btn-lith" style="float:right">Buscar</button>
         <input type="search" style="float:right" v-model="textToSearch" @search="buscar()">
+
+        <div style="margin: 20px 0;">
+            <h3>Filtros:</h3>
+            <form @submit.prevent="filtrar()">
+
+                <label for="fecha"> Fecha: </label>
+                <input type="date" id="fecha" v-model="filter.fecha" placeholder="Ingrese la fecha" />
+
+                <label for="producto"> producto: </label>
+                <select id="producto" v-model="filter.productoId">
+                    <option value="">Todos</option>
+                    <option :value="producto.id" v-for="(producto, index) in productoList" :key="`producto-${index}`">{{ producto.nombre }}
+                    </option>
+                  </select>
+                <button type="submit" class="btn btn-lith">Fitrar</button>
+            </form>
+        </div>
+
+
+
         <table>
             <thead>
                 <tr>
                     <th>No.</th>
                     <th>Producto</th>
                     <th>Cantidad</th>    
-                    <th>Observaciones</th>             
+                    <th>Observaciones</th> 
+                    <th>Fecha de registro</th>            
                     <th></th>
                 </tr>
             </thead>
@@ -26,6 +47,7 @@
                     <td>{{ item.producto.nombre}}</td>
                     <td>{{ item.cantidad }}</td>
                     <td>{{ item.observacion }}</td>
+                    <td>{{ item.fecha }}</td>
                     <td>
                         <button @click="edit(item)" class="btn btn-dark" style="margin-right: 15px;">Editar</button>
                         <button @click="Eliminar(item.id)" class="btn btn-danger">Eliminar</button>
@@ -52,7 +74,13 @@ export default {
             showModalEdit: false,
             itemToEdit: null,
             textToSearch: '',
-            itemList: []
+            itemList: [],
+            productoList: [],
+            path: '',
+            filter: {
+                fecha: null,
+                productoId:''
+            }
         }
     },
     components: {
@@ -66,9 +94,20 @@ export default {
         ...mapActions(['increment']),
         getList() {
             const vm = this;
-            this.axios.get(this.baseUrl + "/inventarios?_expand=producto&q=" + this.textToSearch)
+            this.path = this.baseUrl + "/inventarios?_sort=fecha&_order=desc,asc&_expand=producto&" + this.textToFilter + "&q=" + this.textToSearch;
+            this.axios.get(this.baseUrl + "/inventarios?_sort=fecha&_order=desc,asc&_expand=producto&" + this.textToFilter + "&q=" + this.textToSearch)
                 .then(function (response) {
                     vm.itemList = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        getProductoList() {
+            const vm = this;
+            this.axios.get(this.baseUrl + "/productos")
+                .then(function (response) {
+                    vm.productoList = response.data;
                 })
                 .catch(function (error) {
                     console.error(error);
@@ -93,6 +132,16 @@ export default {
 
         },
         buscar() {
+            this.getList();
+        },
+        filtrar() {
+            this.textToFilter = '';
+            if (this.filter.fecha != null && this.filter.fecha != '') {
+                this.textToFilter += "&fecha=" + this.filter.fecha;
+            }
+            if (this.filter.productoId != null && this.filter.productoId != '') {
+                this.textToFilter += "&productoId=" + this.filter.productoId;
+            }
             this.getList();
         },
         onRegister(event) {
@@ -123,6 +172,7 @@ export default {
     },
     mounted() {
         this.getList();
+        this.getProductoList();
     },
     emits: [] // los eventos personalizados que el componente puede emitir.
 }

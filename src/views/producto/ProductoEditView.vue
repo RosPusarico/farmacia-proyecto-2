@@ -11,9 +11,9 @@
             </div>
 
             <div class="form-group">
-                <label for="name">Descripcion:</label>
-                <input type="text" id="name" v-model="form.descripcion" :class="{ 'is-invalid': errors.descripcion }"
-                    placeholder="Ingrese la descripcion" />
+                <label for="descripcion">Descripcion:</label>
+                <textarea type="text" id="descripcion" v-model="form.descripcion" :class="{ 'is-invalid': errors.descripcion }"
+                    placeholder="Ingrese la descripcion" ></textarea>
                 <div v-if="errors.descripcion" class="invalid-feedback">{{ errors.descripcion }}</div>
             </div>
 

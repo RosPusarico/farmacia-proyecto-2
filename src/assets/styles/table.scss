@@ -1,4 +1,3 @@
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -15,20 +14,20 @@ td {
 }
 
 th {
-    background-color: #f4b400;
-    color: white;
+    background-color: #28a745; // Verde principal para el encabezado
+    color: white; // Texto blanco para contraste
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #e9f5e9; // Verde muy claro para filas pares
 }
 
 tr:hover {
-    background-color: #ddd;
+    background-color: #c8e6c9; // Verde suave para el hover
 }
 
 caption {
     font-size: 1.5em;
     margin: 10px;
-    color: #333;
+    color: #2c6e49; // Verde oscuro para el título
 }

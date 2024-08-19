@@ -1,12 +1,12 @@
 // src/assets/styles/_buttons.scss
 
-// Variables de colores
-$color-primary: #007bff;
-$color-danger: #dc3545;
-$color-warning: #ffc107;
-$color-info: #17a2b8;
-$color-light: #f8f9fa;
-$color-dark: #343a40;
+// Variables de colores verdes
+$color-primary: #28a745; // Verde principal
+$color-danger: #dc3545; // Color de error (puede mantenerse si se desea usar rojo para advertencias y errores)
+$color-warning: #ffc107; // Color de advertencia (puede mantenerse si se desea usar amarillo para advertencias)
+$color-info: #17a2b8; // Color informativo (puede mantenerse si se desea usar azul para información)
+$color-light: #e9ecef; // Verde claro
+$color-dark: #343a40; // Gris oscuro para contraste
 
 $btn-padding: 0.375rem 0.75rem;
 $btn-border-radius: 0.25rem;

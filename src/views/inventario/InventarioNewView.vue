@@ -21,10 +21,19 @@
   
         <div class="form-group">
           <label for="observacion">Observaciones:</label>
-          <input type="text" id="observacion" v-model="form.observacion" :class="{ 'is-invalid': errors.observacion }"
-            placeholder="Ingrese las observaciones" />
+          <textarea type="text" id="observacion" v-model="form.observacion" :class="{ 'is-invalid': errors.observacion }"
+            placeholder="Ingrese las observaciones" ></textarea>
           <div v-if="errors.observacion" class="invalid-feedback">{{ errors.observacion }}</div>
         </div>
+
+        <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" v-model="form.fecha" :class="{ 'is-invalid': errors.fecha }"
+          placeholder="Ingrese la fecha" />
+        <div v-if="errors.fecha" class="invalid-feedback">{{ errors.fecha }}</div>
+        </div>
+
+
   
         <button type="submit" class="btn btn-primary">Registrar</button>
       </form>
@@ -41,7 +50,8 @@
         form: {
             productoId: null,
             cantidad: '',
-            observaciones: ''
+            observacion: '',
+            fecha:null
         },
         errors: {}
       };
@@ -61,7 +71,10 @@
   
         if (!this.form.observacion) {
           this.errors.observacion = 'La observacion es obligatoria.';
-        }         
+        }  
+        if (!this.form.fecha) {
+        this.errors.fecha = 'La fecha es obligatorio.';
+        }       
         return Object.keys(this.errors).length === 0;
       },
   
@@ -73,7 +86,7 @@
           this.form = {
             productoId: null,
             cantidad: '',
-            observaciones: ''
+            observacion: ''
           };
         }
       },

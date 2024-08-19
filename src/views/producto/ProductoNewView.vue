@@ -12,10 +12,11 @@
 
             <div class="form-group">
                 <label for="descripcion">Descripcion:</label>
-                <input type="text" id="descripcion" v-model="form.descripcion" :class="{ 'is-invalid': errors.descripcion }"
-                    placeholder="Ingrese la descripcion" />
+                <textarea type="text" id="descripcion" v-model="form.descripcion" :class="{ 'is-invalid': errors.descripcion }"
+                    placeholder="Ingrese la descripcion" ></textarea>
                 <div v-if="errors.descripcion" class="invalid-feedback">{{ errors.descripcion }}</div>
             </div>
+
             <div class="form-group">
                 <label for="precio">Precio:</label>
                 <input type="number" id="precio" v-model="form.precio" :class="{ 'is-invalid': errors.precio }"

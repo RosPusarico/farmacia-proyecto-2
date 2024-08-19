@@ -8,7 +8,7 @@
         </Modal>
         <h1>Lista de Productos</h1>
         <button @click="showModalNuevo = true" class="btn btn-primary">Nuevo</button>
-        <button @click="buscar()" class="btn btn-lith" style="float:right">Buscar</button>
+        <button @click="buscar()" class="btn btn-secundary" style="float:right">Buscar</button>
         <input type="search" style="float:right" v-model="textToSearch" @search="buscar()">
         <table>
             <thead>
@@ -71,7 +71,7 @@ export default {
         ...mapActions(['increment']),
         getList() {
             const vm = this;
-            this.axios.get(this.baseUrl + "/productos" + this.textToSearch)
+            this.axios.get(this.baseUrl + "/productos?nombre_like=" + this.textToSearch)
                 .then(function (response) {
                     console.log(response);
                     vm.itemList = response.data;
