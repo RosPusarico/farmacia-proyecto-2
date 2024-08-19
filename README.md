@@ -15,5 +15,14 @@ npm run serve
 npm run build
 ```
 
+### Install json server
+```
+npm install -g  json-server@0.17.1
+```
+
+### Init server json 
+```
+json-server --watch db.json --port 4000
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
